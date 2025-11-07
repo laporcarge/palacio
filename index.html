@@ -115,13 +115,12 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const btn = document.getElementById("btn");
-      const WA_NUMBER = "5493517386955"; // tu número sin el "+"
+      const WA_NUMBER = "5492236768310"; // número actualizado
 
       btn.addEventListener("click", function () {
         if (typeof fbq !== 'undefined') {
           fbq('track', 'Contact');
         }
-        // Abre chat vacío para que el usuario escriba su mensaje
         const url = `https://wa.me/${WA_NUMBER}`;
         window.open(url, "_blank");
       });
