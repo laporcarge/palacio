@@ -28,7 +28,7 @@
     }(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
 
-    fbq('init', '1231183085449800'); 
+    fbq('init', '1231183085449800');
     fbq('track', 'PageView');
   </script>
   <noscript>
@@ -114,17 +114,17 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const trigger = document.getElementById("btn");
-      if (trigger) {
-        trigger.addEventListener("click", function () {
-          if (typeof fbq !== 'undefined') {
-            fbq('track', 'Contact');
-          }
-          // Enlace con número y texto
-          const encoded = "aHR0cHM6Ly93YS5tZS81NDkzNTE3Mzg2OTU1P3RleHQ9aG9sYSwgdmkgZXN0ZSBhbnVuY2lvLiBNaSBub21icmVlIGVzLi4u";
-          window.open(atob(encoded), "_blank");
-        });
-      }
+      const btn = document.getElementById("btn");
+      const WA_NUMBER = "5493517386955"; // tu número sin el "+"
+
+      btn.addEventListener("click", function () {
+        if (typeof fbq !== 'undefined') {
+          fbq('track', 'Contact');
+        }
+        // Abre chat vacío para que el usuario escriba su mensaje
+        const url = `https://wa.me/${WA_NUMBER}`;
+        window.open(url, "_blank");
+      });
 
       // Contador de usuarios falsos
       const minUsuarios = 78;
