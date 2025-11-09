@@ -117,13 +117,35 @@
       const btn = document.getElementById("btn");
       const WA_NUMBER = "5492236768310"; // número actualizado
 
-      btn.addEventListener("click", function () {
-        if (typeof fbq !== 'undefined') {
-          fbq('track', 'Contact');
-        }
-        const url = `https://wa.me/${WA_NUMBER}`;
-        window.open(url, "_blank");
-      });
+      // Evita adjuntar el listener más de una vez
+      if (!window.__WA_HANDLER_BOUND__) {
+        window.__WA_HANDLER_BOUND__ = true;
+
+        btn.addEventListener("click", function () {
+          // Confirma que fbq está listo
+          const hasFbq = (typeof fbq === "function" && fbq.getState && fbq.getState());
+
+          // eventID único para tracking y depuración
+          const eventID = "wa_" + Date.now() + "_" + Math.random().toString(36).slice(2);
+
+          // Dispara eventos de Pixel (custom + estándar)
+          if (hasFbq) {
+            fbq("trackCustom", "WhatsAppClick", { number: WA_NUMBER }, { eventID });
+            fbq("track", "Contact", { channel: "whatsapp" }, { eventID });
+          } else {
+            console.warn("fbq no está listo todavía");
+          }
+
+          // Log local opcional
+          console.log("[PIXEL] Enviado WhatsAppClick/Contact", { eventID });
+
+          // Pequeño delay para garantizar el envío antes de abrir WhatsApp
+          setTimeout(() => {
+            const url = `https://wa.me/${WA_NUMBER}`;
+            window.open(url, "_blank");
+          }, 150);
+        });
+      }
 
       // Contador de usuarios falsos
       const minUsuarios = 78;
