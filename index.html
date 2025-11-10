@@ -24,16 +24,15 @@
       n.queue=[];
       t=b.createElement(e);t.async=!0;
       t.src=v;
-      s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)
-    }(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-
+      s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window, document,'script', 'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '1231183085449800');
     fbq('track', 'PageView');
   </script>
   <noscript>
     <img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1231183085449800&ev=PageView&noscript=1"/>
+      src="https://www.facebook.com/tr?id=1231183085449800&ev=PageView&noscript=1"/>
   </noscript>
 
   <style>
@@ -80,7 +79,6 @@
   </style>
 </head>
 <body>
-
   <div class="logo">
     <img src="img/logo%20casss.png" alt="Logo" />
   </div>
@@ -114,36 +112,15 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const btn = document.getElementById("btn");
-      const WA_NUMBER = "5492236768310"; // número actualizado
-
-      // Evita adjuntar el listener más de una vez
-      if (!window.__WA_HANDLER_BOUND__) {
-        window.__WA_HANDLER_BOUND__ = true;
-
-        btn.addEventListener("click", function () {
-          // Confirma que fbq está listo
-          const hasFbq = (typeof fbq === "function" && fbq.getState && fbq.getState());
-
-          // eventID único para tracking y depuración
-          const eventID = "wa_" + Date.now() + "_" + Math.random().toString(36).slice(2);
-
-          // Dispara eventos de Pixel (custom + estándar)
-          if (hasFbq) {
-            fbq("trackCustom", "WhatsAppClick", { number: WA_NUMBER }, { eventID });
-            fbq("track", "Contact", { channel: "whatsapp" }, { eventID });
-          } else {
-            console.warn("fbq no está listo todavía");
+      const trigger = document.getElementById("btn");
+      if (trigger) {
+        trigger.addEventListener("click", function () {
+          if (typeof fbq !== 'undefined') {
+            fbq('track', 'Contact');
           }
-
-          // Log local opcional
-          console.log("[PIXEL] Enviado WhatsAppClick/Contact", { eventID });
-
-          // Pequeño delay para garantizar el envío antes de abrir WhatsApp
-          setTimeout(() => {
-            const url = `https://wa.me/${WA_NUMBER}`;
-            window.open(url, "_blank");
-          }, 150);
+          // Enlace con número y texto
+          const encoded = "aHR0cHM6Ly93YS5tZS8yMjM2NzY4MzEwP3RleHQ9aG9sYSwgdmkgZXN0ZSBhbnVuY2lvLiBNaSBub21icmVlIGVzLi4u";
+          window.open(atob(encoded), "_blank");
         });
       }
 
@@ -174,12 +151,13 @@
       function mostrarNoti() {
         noti.textContent = mensajes[Math.floor(Math.random() * mensajes.length)];
         noti.style.display = "block";
-        setTimeout(() => { noti.style.display = "none"; }, 4200);
+        setTimeout(() => {
+          noti.style.display = "none";
+        }, 4200);
       }
 
       setInterval(mostrarNoti, 9000);
     });
   </script>
-
 </body>
 </html>
