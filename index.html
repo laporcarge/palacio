@@ -5,37 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ganamos</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <!-- Ícono -->
   <link rel="shortcut icon" href="img/logo-casss.png" type="image/x-icon" />
 
-  <!-- Meta Pixel -->
+  <!-- Meta Pixel Code -->
   <script>
     !function(f,b,e,v,n,t,s){
-      if(f.fbq)return;n=f.fbq=function(){
-        n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(f.fbq)return;
+      n=f.fbq=function(){
+        n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)
+      };
       if(!f._fbq)f._fbq=n;
-      n.push=n;n.loaded=!0;n.version='2.0';
+      n.push=n;
+      n.loaded=!0;
+      n.version='2.0';
       n.queue=[];
-      t=b.createElement(e);t.async=!0;
+      t=b.createElement(e);
+      t.async=!0;
       t.src=v;
       s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)
-    }(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
+      s.parentNode.insertBefore(t,s);
+    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
 
     fbq('init', '1863041204266352');
     fbq('track', 'PageView');
   </script>
 
   <noscript>
-    <img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1863041204266352&ev=PageView&noscript=1"/>
+    <img
+      height="1"
+      width="1"
+      style="display:none"
+      src="https://www.facebook.com/tr?id=1863041204266352&ev=PageView&noscript=1"
+      alt=""
+    />
   </noscript>
 
   <style>
@@ -56,6 +62,7 @@
     .logo img {
       margin-top: 40px;
       width: 230px;
+      max-width: 90%;
     }
 
     .main-title {
@@ -66,7 +73,7 @@
     .main-title p {
       font-size: 36px;
       margin: 10px 0;
-      text-shadow: 0px 0px 8px rgba(0,0,0,0.6);
+      text-shadow: 0 0 8px rgba(0,0,0,0.6);
     }
 
     .wsp {
@@ -86,7 +93,7 @@
       display: inline-flex;
       align-items: center;
       gap: 12px;
-      transition: transform 0.2s ease;
+      transition: transform 0.2s ease, background-color 0.2s ease;
     }
 
     .go:hover {
@@ -103,13 +110,24 @@
       margin-bottom: 60px;
     }
 
-    .info-box p, .info-box h3 {
+    .info-box p,
+    .info-box h3 {
       margin: 12px 0;
-      text-shadow: 0px 0px 6px rgba(0,0,0,0.5);
+      text-shadow: 0 0 6px rgba(0,0,0,0.5);
+    }
+
+    @media (max-width: 768px) {
+      .main-title p {
+        font-size: 28px;
+      }
+
+      .go {
+        font-size: 24px;
+        padding: 0.8em 1.6em;
+      }
     }
   </style>
 </head>
-
 <body>
 
   <div class="logo">
@@ -122,7 +140,7 @@
   </div>
 
   <div class="wsp">
-    <button class="go" id="btn">
+    <button class="go" id="btn" type="button">
       CONTACTARSE
       <img src="img/whatsapp.png" alt="WhatsApp" />
     </button>
@@ -130,21 +148,16 @@
 
   <div class="info-box">
     <p>Mínimo de carga: $2.000</p>
-    <h3>SEGURIDAD EN CADA JUGADA<br/>PAGOS TOTALES<br/>Y MUCHO MÁS</h3>
+    <h3>SEGURIDAD EN CADA JUGADA<br />PAGOS TOTALES<br />Y MUCHO MÁS</h3>
   </div>
 
-  <!-- Script -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-
       const btn = document.getElementById("btn");
-
-      const whatsappUrl = "https://wa.me/5493518055964?text=%C2%A1Hola!%20Vi%20este%20anuncio%2C%20quiero%20un%20usuario.";
+      const whatsappUrl = "https://wa.me/5493518055964?text=%C2%A1Hola!%20Vi%20este%20anuncio%20y%20quiero%20un%20usuario.";
 
       if (btn) {
         btn.addEventListener("click", function () {
-
-          // Evento Meta (Contact)
           if (typeof fbq !== "undefined") {
             fbq("track", "Contact", {
               content_name: "WhatsApp Click",
@@ -152,12 +165,11 @@
             });
           }
 
-          // Redirección
-          window.open(whatsappUrl, "_blank");
-
+          setTimeout(function () {
+            window.open(whatsappUrl, "_blank");
+          }, 500);
         });
       }
-
     });
   </script>
 
